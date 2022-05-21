@@ -74,7 +74,19 @@ use 'theHamsta/nvim-semantic-tokens'
     preset = "default"
   }
 
+use ({
+    'onsails/diaglist.nvim',
+    config = function()
+        require("diaglist").init({
+            -- optional settings
+            -- below are defaults
+            debug = false,
 
+            -- increase for noisy servers
+            debounce_ms = 150,
+        })
+    end
+})
 
 use({
   "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
