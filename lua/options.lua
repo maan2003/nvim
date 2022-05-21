@@ -15,6 +15,8 @@ local opts = {
    lazyredraw = true,
    incsearch = true,
    scrolloff = 3,
+   ignorecase = true,
+   smartcase = true,
 }
 
 for key, value in pairs(opts) do
