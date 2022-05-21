@@ -9,7 +9,10 @@ return {
    { mode = 'nvo', {
       { 'm', '<cmd>HopChar1<cr>' },
    } },
-
+   { ']e', '<cmd>lnext<cr>'},
+   { '[e', '<cmd>lprevious<cr>'},
+   { ']E', '<cmd>cnext<cr>'},
+   { '[E', '<cmd>cprevious<cr>'},
    -- lsp bindings
    { 'gd', '<cmd>Telescope lsp_definitions<cr>' },
    { 'gr', '<cmd>Telescope lsp_references<cr>' },
