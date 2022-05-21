@@ -17,6 +17,7 @@ local opts = {
    scrolloff = 3,
    ignorecase = true,
    smartcase = true,
+   showmode = false,
 }
 
 for key, value in pairs(opts) do
