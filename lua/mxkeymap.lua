@@ -9,10 +9,19 @@ return {
    { mode = 'nvo', {
       { 'm', '<cmd>HopChar1<cr>' },
    } },
-   { ']e', '<cmd>lnext<cr>'},
-   { '[e', '<cmd>lprevious<cr>'},
-   { ']E', '<cmd>cnext<cr>'},
-   { '[E', '<cmd>cprevious<cr>'},
+   -- jump movement
+   { '<down>', '<c-o>' },                 -- CapsLock + k
+   { '<up>', '<c-i>' },                   -- CapsLock + i
+
+   { '<left>', 'g;' },                    -- CapsLock + j
+   { '<ca-u>', 'g,' },                    -- CapsLock + u
+
+   { '<ca-o>', '<cmd>lprevious<cr>' },    -- CapsLock + o
+   { '<right>', '<cmd>lnext<cr>' },       -- CapsLock + l
+
+   { '<delete>', '<cmd>cprevious<cr>' },  -- CapsLock + p
+   { '<backspace>', '<cmd>cnext<cr>' },   -- CapsLock + ;
+
    -- lsp bindings
    { 'gd', '<cmd>Telescope lsp_definitions<cr>' },
    { 'gr', '<cmd>Telescope lsp_references<cr>' },
