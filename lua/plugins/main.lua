@@ -42,7 +42,7 @@ use {
          start_in_insert = true,
          insert_mappings = true, -- whether or not the open mapping applies in insert mode
          persist_size = true,
-         direction = 'horizontal',
+         direction = 'float',
          close_on_exit = true, -- close the terminal window when the process exits
       }
    end,
@@ -107,6 +107,3 @@ vim.cmd[[autocmd TermOpen term://* startinsert]]
 vim.cmd[[tnoremap <F9><F9> <C-\><C-n><C-w><C-w>]]
 vim.cmd[[noremap <F9><F9> <C-w><C-w>]]
 
-use {
-    'ActivityWatch/aw-watcher-vim',
-}

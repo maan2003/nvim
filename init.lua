@@ -1,3 +1,4 @@
+require('impatient')
 local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
 
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
@@ -15,6 +16,7 @@ end
 require 'options'
 require('packer').startup(function(use)
    use 'wbthomason/packer.nvim'
+   use 'lewis6991/impatient.nvim'
    require 'plugins/eye-candy'
    require 'mxkeymap'
    require 'plugins/main'

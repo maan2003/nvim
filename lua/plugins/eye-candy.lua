@@ -5,8 +5,9 @@ use 'elianiva/icy.nvim'
 use 'sainnhe/gruvbox-material'
 use 'arkav/lualine-lsp-progress'
 
+vim.o.termguicolors = true
 -- vim.cmd[[let g:gruvbox_material_diagnostic_virtual_text = 'colored']]
--- vim.cmd[[colorscheme gruvbox-material]]
+vim.cmd[[colorscheme gruvbox-material]]
 -- icons for lsp
 use {
    'projekt0n/circles.nvim',
@@ -18,7 +19,8 @@ use {
 use {
    'projekt0n/github-nvim-theme',
    config = function()
-      require('github-theme').setup { theme_style = 'dark' }
+      -- require('github-theme').setup { theme_style = 'dark' }
+      -- vim.cmd[[hi Normal guibg=NONE ctermbg=NONE]]
    end,
 }
 
@@ -29,11 +31,11 @@ use {
    config = function()
       require('lualine').setup {
          options = {
-            theme = 'github',
             disabled_filetypes = { 'toggleterm', 'Trouble' },
             section_separators = '',
             component_separtors = '',
             icons = false,
+            globalstatus = true,
          },
          sections = {
             lualine_b = {

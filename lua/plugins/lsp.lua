@@ -4,7 +4,7 @@ use {
    'neovim/nvim-lspconfig',
    config = function()
       local cfg = require 'lspconfig'
-      cfg.clangd.setup {}
+      cfg.clangd.setup { }
       cfg.zls.setup {}
    end,
 }
@@ -26,7 +26,9 @@ use {
             autoSetHints = false,
          },
          server = {
+            cmd = { "nc", "localhost", "6969" },
             capabilities = caps,
+            standalone = false,
             settings = {
                ['rust-analyzer'] = {
                   checkOnSave = {
@@ -107,3 +109,12 @@ use 'theHamsta/nvim-semantic-tokens'
   require("nvim-semantic-tokens").setup {
     preset = "default"
   }
+
+
+
+use({
+  "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+  config = function()
+    -- require("lsp_lines").register_lsp_virtual_lines()
+  end,
+})
