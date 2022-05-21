@@ -11,11 +11,11 @@ return {
    } },
 
    -- lsp bindings
-   { 'gg', '<cmd>Telescope lsp_definitions<cr>' },
+   { 'gd', '<cmd>Telescope lsp_definitions<cr>' },
    { 'gr', '<cmd>Telescope lsp_references<cr>' },
    { 'gt', '<cmd>Telescope lsp_type_definitions<cr>' },
    { 'gi', '<cmd>Telescope lsp_implementations<cr>' },
-   { 'G', '<cmd>Telescope lsp_dynamic_workspace_symbols<cr>' },
+   { 'g<space>', '<cmd>Telescope lsp_dynamic_workspace_symbols<cr>' },
    { 'ge', '<cmd>TroubleToggle workspace_diagnostics<cr>' },
    { 'gE', '<cmd>TroubleToggle<cr>' },
    { 'gu', '<cmd>RustParentModule<cr>' },
@@ -36,9 +36,6 @@ return {
    { '<F9>g', '<cmd>Neogit kind=split<cr>' },
    { '<F9>/', '<cmd>Telescope live_grep<cr>' },
    { mode = 't', { '<F9>t', '<cmd>ToggleTerm<cr>' } },
-   -- { 'p', '<cmd>Telescope current_buffer_fuzzy_find<cr>' },
-   -- { 'P', '<cmd>Telescope live_grep<cr>' },
-   -- { '<a-x>', ':' },
    { '<F9>q', '<c-w>q' },
    { '<F9><s-q>', '<c-w><c-q>' },
 
