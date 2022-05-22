@@ -7,7 +7,7 @@ use {
    'ahmedkhalf/project.nvim',
    config = function()
       require('project_nvim').setup {
-         manual_mode = true,
+         manual_mode = false,
          exclude_dirs = { '~/.cargo/*', '~/.rustup/*', '~/.local/*', '/usr/*' },
       }
       require('telescope').load_extension 'projects'
