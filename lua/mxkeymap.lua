@@ -1,3 +1,4 @@
+local fancy_n = require("fancyn")
 return {
    -- commands
    { 'xx', '<cmd>Telescope lsp_code_actions theme=cursor<cr>' },
@@ -9,6 +10,11 @@ return {
    { mode = 'nvo', {
       { 'm', '<cmd>HopChar1<cr>' },
    } },
+   { 'n', fancy_n.n },
+   { 'N', fancy_n.N },
+   { '/', fancy_n.search },
+   { 'ge', function () fancy_n.set_mode(fancy_n.modes.locationlist) end },
+   { 'gE', function () fancy_n.set_mode(fancy_n.modes.quickfixlist) end },
    -- jump movement
    { '<down>', '<c-o>' },                 -- CapsLock + k
    { '<up>', '<c-i>' },                   -- CapsLock + i
@@ -16,20 +22,12 @@ return {
    { '<left>', 'g;' },                    -- CapsLock + j
    { '<ca-u>', 'g,' },                    -- CapsLock + u
 
-   { '<ca-o>', '<cmd>lprevious<cr>' },    -- CapsLock + o
-   { '<right>', '<cmd>lnext<cr>' },       -- CapsLock + l
-
-   { '<delete>', '<cmd>cprevious<cr>' },  -- CapsLock + p
-   { '<backspace>', '<cmd>cnext<cr>' },   -- CapsLock + ;
-
    -- lsp bindings
    { 'gd', '<cmd>Telescope lsp_definitions<cr>' },
    { 'gr', '<cmd>Telescope lsp_references<cr>' },
    { 'gt', '<cmd>Telescope lsp_type_definitions<cr>' },
    { 'gi', '<cmd>Telescope lsp_implementations<cr>' },
    { 'g<space>', '<cmd>Telescope lsp_dynamic_workspace_symbols<cr>' },
-   { 'ge', '<cmd>TroubleToggle workspace_diagnostics<cr>' },
-   { 'gE', '<cmd>TroubleToggle<cr>' },
    { 'gu', '<cmd>RustParentModule<cr>' },
 
    { '<F9>s', '<cmd>w<cr>' },
