@@ -5,7 +5,7 @@ return {
       { 'xx', "<cmd>'<,'>Telescope lsp_range_code_actions theme=cursor<cr>" },
    } },
    { 'xf', vim.lsp.buf.formatting },
-   { 'xr', '<cmd>Telescope lsp_rename<cr>' },
+   { 'xr', vim.lsp.buf.rename },
    { mode = 'nvo', {
       { 'm', '<cmd>HopChar1<cr>' },
    } },
