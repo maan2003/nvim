@@ -103,7 +103,67 @@ use {
     run = "./install.sh",
 }
 
-vim.cmd[[autocmd TermOpen term://* startinsert]]
+vim.cmd[[autocmd BufEnter term://* startinsert]]
 vim.cmd[[tnoremap <F9><F9> <C-\><C-n><C-w><C-w>]]
 vim.cmd[[noremap <F9><F9> <C-w><C-w>]]
+vim.cmd[[autocmd TermOpen * setlocal nobuflisted nonumber norelativenumber]]
 
+local function gdb()
+    return NvimGdb.i()
+end
+
+local function gdbsend(arg) 
+    return function() gdb():send(arg) end
+end
+
+local dbg_mappings = {
+    {'n', gdbsend("next")},
+    {'s', gdbsend("step")},
+    {'N', gdbsend('reverse-next')},
+    {'f', gdbsend('finish')},
+    {'F', gdbsend('reverse-finish')},
+    {'u', function () 
+        gdb():send('until "%s:%s"', vim.fn.expand("%:p"), vim.fn.line('.')) 
+    end},
+    {'c', gdbsend('continue')},
+    {'C', gdbsend('reverse-continue')},
+    -- TODO: treesitter expr
+    {'p', '<cmd>GdbEvalWord<cr>'},
+    {'a', function () 
+        gdb():send('advance "%s:%s"', vim.fn.expand("%:p"), vim.fn.line('.')) 
+    end},
+    {'d', function() gdb():breakpoint_toggle() end},
+    {'<C-u>', gdbsend('up') },
+    {'<C-d>', gdbsend('down') },
+}
+
+require('nvimgdb.config').setup {
+    set_keymaps = function() 
+
+        require 'nest'.applyKeymaps {
+            buffer = true,
+            options = { nowait = true, noremap = true },
+            dbg_mappings,
+        }
+    end,
+    unset_keymaps = function()
+        for key in pairs(dbg_mappings) do
+            vim.api.nvim_buf_del_keymap(0, 'n', key[0])
+        end
+    end
+}
+
+use {
+  "ahmedkhalf/jupyter-nvim",
+  run = ":UpdateRemotePlugins",
+  config = function()
+    require("jupyter-nvim").setup {
+      -- your configuration comes here
+      -- or leave it empty to use the default settings
+      -- refer to the configuration section below
+    }
+  end
+}
+
+vim.cmd[[hi GdbCurrentLine guibg=#464022]]
+vim.cmd[[hi GdbBreakpointSign guifg=#EA6962]]
