@@ -18,6 +18,7 @@ local opts = {
    ignorecase = true,
    smartcase = true,
    showmode = false,
+   signcolumn = 'number',
 }
 
 for key, value in pairs(opts) do
