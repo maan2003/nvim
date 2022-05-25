@@ -1,5 +1,7 @@
 require('impatient')
 local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
+vim.cmd[[let g:do_filetype_lua = 1]]
+vim.cmd[[let g:did_load_filetypes = 0]]
 
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
    packer_bootstrap = vim.fn.system {
