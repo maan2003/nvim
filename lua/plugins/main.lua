@@ -21,6 +21,8 @@ use {
 
 use {
    'phaazon/hop.nvim',
+   opt = true,
+   cmd = { 'HopChar1' },
    config = function()
       require('hop').setup { keys = 'arstdhneiofuvkpl' }
    end,
