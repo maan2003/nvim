@@ -25,7 +25,6 @@ require('packer').startup(function(use)
    require 'plugins/ts'
    require 'plugins/tele'
    require 'plugins/cmp'
-   require 'plugins/git'
 
    if packer_bootstrap then
       require('packer').sync()
