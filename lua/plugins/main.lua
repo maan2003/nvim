@@ -88,8 +88,6 @@ use {
    end,
 }
 
-use 'kevinhwang91/nvim-bqf'
-
 use {
    'chipsenkbeil/distant.nvim',
    config = function()
