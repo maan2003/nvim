@@ -69,11 +69,6 @@ lsp_installer.on_server_ready(function(server)
     server:setup(opts)
 end)
 
-use 'theHamsta/nvim-semantic-tokens'
-  require("nvim-semantic-tokens").setup {
-    preset = "default"
-  }
-
 use ({
     'onsails/diaglist.nvim',
     config = function()
