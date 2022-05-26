@@ -1,7 +1,5 @@
 local use = require('packer').use
 -- themes
-use 'yonlu/omni.vim'
-use 'elianiva/icy.nvim'
 use 'sainnhe/gruvbox-material'
 use 'arkav/lualine-lsp-progress'
 
