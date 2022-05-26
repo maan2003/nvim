@@ -159,17 +159,5 @@ require('nvimgdb.config').setup {
     end
 }
 
-use {
-  "ahmedkhalf/jupyter-nvim",
-  run = ":UpdateRemotePlugins",
-  config = function()
-    require("jupyter-nvim").setup {
-      -- your configuration comes here
-      -- or leave it empty to use the default settings
-      -- refer to the configuration section below
-    }
-  end
-}
-
 vim.cmd[[hi GdbCurrentLine guibg=#464022]]
 vim.cmd[[hi GdbBreakpointSign guifg=#EA6962]]
