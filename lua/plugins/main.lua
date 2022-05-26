@@ -90,6 +90,7 @@ use {
 
 use {
    'chipsenkbeil/distant.nvim',
+   disable = true,
    config = function()
       require('distant').setup {
          -- Applies Chip's personal settings to every machine you connect to
