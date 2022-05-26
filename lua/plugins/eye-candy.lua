@@ -1,11 +1,11 @@
 local use = require('packer').use
 -- themes
-use 'sainnhe/gruvbox-material'
+use 'wittyjudge/gruvbox-material.nvim'
 use 'arkav/lualine-lsp-progress'
 
 vim.o.termguicolors = true
+require('gruvbox-material').setup()
 -- vim.cmd[[let g:gruvbox_material_diagnostic_virtual_text = 'colored']]
-vim.cmd[[colorscheme gruvbox-material]]
 -- icons for lsp
 use {
    'projekt0n/circles.nvim',
