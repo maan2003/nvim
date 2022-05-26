@@ -16,7 +16,11 @@ use {
    end,
 }
 
-use 'nvim-treesitter/playground'
+use {
+   'nvim-treesitter/playground',
+   opt = true,
+   cmd = 'TSPlaygroundToggle',
+}
 
 use {
    'romgrk/nvim-treesitter-context',
