@@ -1,7 +1,5 @@
 local use = require('packer').use
 
-use 'nvim-lua/popup.nvim'
-use 'nvim-lua/plenary.nvim'
 
 use {
    'ahmedkhalf/project.nvim',
