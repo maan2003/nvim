@@ -30,6 +30,10 @@ use {
 use 'sbdchd/neoformat'
 use {
    'akinsho/toggleterm.nvim',
+   opt = true,
+   cmd = { 'ToggleTerm' },
+   keys = '<c-\\>',
+
    config = function()
       require('toggleterm').setup {
          -- size can be a number or function which is passed the current terminal
