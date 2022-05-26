@@ -3,6 +3,7 @@ local use = require('packer').use
 
 use {
    'ahmedkhalf/project.nvim',
+   after = "telescope.nvim",
    config = function()
       require('project_nvim').setup {
          manual_mode = false,
