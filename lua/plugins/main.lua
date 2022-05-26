@@ -164,3 +164,7 @@ vim.cmd[[autocmd BufEnter term://* startinsert]]
 vim.cmd[[tnoremap <F9><F9> <C-\><C-n><C-w><C-w>]]
 vim.cmd[[noremap <F9><F9> <C-w><C-w>]]
 vim.cmd[[autocmd TermOpen * setlocal nobuflisted nonumber norelativenumber]]
+
+use {
+  'jghauser/mkdir.nvim'
+}
