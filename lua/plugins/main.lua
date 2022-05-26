@@ -65,6 +65,8 @@ use 'github/copilot.vim'
 
 use {
    'TimUntersberger/neogit',
+   opt = true,
+   cmd = { 'Neogit' },
    requires = {
       'sindrets/diffview.nvim',
    },
