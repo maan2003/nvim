@@ -106,8 +106,6 @@ use {
 
 use {
     'sakhnik/nvim-gdb',
-    opt = true,
-    cmd = { 'GdbStart' },
     run = "./install.sh",
     config = function()
         local function gdb()
@@ -118,7 +116,7 @@ use {
             return function() gdb():send(arg) end
         end
 
-        local dbg_mappings = {
+        dbg_mappings = {
             {'n', gdbsend("next")},
             {'s', gdbsend("step")},
             {'N', gdbsend('reverse-next')},
@@ -149,8 +147,8 @@ use {
                 }
             end,
             unset_keymaps = function()
-                for key in pairs(dbg_mappings) do
-                    vim.api.nvim_buf_del_keymap(0, 'n', key[0])
+                for _, value in ipairs(dbg_mappings) do
+                    vim.api.nvim_buf_del_keymap(0, 'n', value[1])
                 end
             end
         }
