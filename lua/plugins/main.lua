@@ -28,7 +28,11 @@ use {
       require('hop').setup { keys = 'arstdhneiofuvkpl' }
    end,
 }
-use 'sbdchd/neoformat'
+use {
+   'sbdchd/neoformat',
+   cmd = { 'Neoformat' }
+}
+
 use {
    'akinsho/toggleterm.nvim',
    opt = true,
