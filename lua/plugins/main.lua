@@ -166,3 +166,4 @@ vim.cmd[[autocmd TermOpen * setlocal nobuflisted nonumber norelativenumber]]
 use {
   'jghauser/mkdir.nvim'
 }
+use 'tpope/vim-sleuth'
