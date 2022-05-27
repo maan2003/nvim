@@ -49,10 +49,12 @@ use {
 use {
    'nvim-treesitter/nvim-treesitter-textobjects',
    -- really ununsable right now
-   disable = true,
    config = function()
       require('nvim-treesitter.configs').setup {
          textobjects = {
+            move = {
+               enable = true,
+            },
             select = {
                enable = true,
 
@@ -61,14 +63,12 @@ use {
 
                keymaps = {
                   -- You can use the capture groups defined in textobjects.scm
-                  ['f'] = '@function.outer',
-                  ['t'] = '@statement.outer',
-                  ['s'] = '@block.outer',
-                  -- ['T'] = '@path',
-                  -- ['p'] = '@item',
-                  ['r'] = {
-                     rust = '(_expression) @expr',
-                  },
+                  ['af'] = '@function.outer',
+                  ['if'] = '@function.inner',
+                  ['at'] = '@statement.outer',
+                  ['it'] = '@statement.inner',
+                  ['ab'] = '@block.outer',
+                  ['ib'] = '@block.inner',
                },
             },
          },
