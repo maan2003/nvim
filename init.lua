@@ -1,4 +1,4 @@
-require('impatient')
+pcall(require, 'impatient')
 local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
 
 vim.g.do_filetype_lua = 1
