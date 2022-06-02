@@ -1,9 +1,9 @@
 local fancy_n = require("fancyn")
 return {
    -- commands
-   { 'xx', '<cmd>Telescope lsp_code_actions theme=cursor<cr>' },
+   { 'xx', vim.lsp.buf.code_action },
    { mode = 'v', {
-      { 'xx', "<cmd>'<,'>Telescope lsp_range_code_actions theme=cursor<cr>" },
+      { 'xx', ':<c-u>lua vim.lsp.buf.range_code_action()<cr>' },
    } },
    { 'xf', vim.lsp.buf.formatting },
    { 'xr', vim.lsp.buf.rename },
