@@ -109,7 +109,7 @@ use {
 }
 
 use {
-    'sakhnik/nvim-gdb',
+    'Maan2003/nvim-gdb',
     run = "./install.sh",
     config = function()
         local function gdb()
