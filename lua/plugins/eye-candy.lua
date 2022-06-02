@@ -1,10 +1,14 @@
 local use = require('packer').use
 -- themes
-use 'wittyjudge/gruvbox-material.nvim'
+use {
+   'wittyjudge/gruvbox-material.nvim',
+   config = function()
+      require('gruvbox-material').setup()
+   end
+}
 use 'arkav/lualine-lsp-progress'
 
 vim.o.termguicolors = true
-require('gruvbox-material').setup()
 
 use 'projekt0n/circles.nvim'
 
