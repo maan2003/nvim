@@ -8,6 +8,11 @@ use {
    config = function()
       require('telescope').setup {
          defaults = {
+            mappings = {
+                i = {
+                    ['<f9>'] =  require "telescope.actions".close,
+                },
+            },
             layout_config = {
                horizontal = {
                   width = 999,
