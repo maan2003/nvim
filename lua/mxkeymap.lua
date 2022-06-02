@@ -7,6 +7,31 @@ return {
    } },
    { 'xf', vim.lsp.buf.formatting },
    { 'xr', vim.lsp.buf.rename },
+   { 'xe', function() 
+        local old = vim.diagnostic.config().virtual_lines
+        if old then
+            local min_warn = { min = vim.diagnostic.severity.WARN };
+            vim.diagnostic.config {
+                virtual_text = {
+                    severity = min_warn,
+                    format = function(diag)
+                        return diag.message:match("^([^\n]+)\n")
+                    end
+                },
+                underline = {
+                    severity = min_warn,
+                },
+                virtual_lines = false,
+            }
+        else
+            vim.diagnostic.config {
+                underline = true,
+                virtual_lines = true,
+                virtual_text = false,
+            }
+        end
+    end
+    },
    { mode = 'nvo', {
       { 'm', '<cmd>HopChar1<cr>' },
    } },

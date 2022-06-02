@@ -61,4 +61,25 @@ use {
    end
 }
 
+vim.diagnostic.config({signs = false})
+use {
+  "Maan2003/lsp_lines.nvim",
+  config = function()
+    require("lsp_lines").register_lsp_virtual_lines()
+    local min_warn = { min = vim.diagnostic.severity.WARN };
+    vim.diagnostic.config {
+        virtual_text = {
+           severity = min_warn,
+           prefix = "",
+           format = function(diag)
+              return diag.message:match("^([^\n]+)\n")
+           end
+        },
+        underline = {
+            severity = min_warn,
+        },
+        virtual_lines = false,
+    }
+  end,
+}
 
