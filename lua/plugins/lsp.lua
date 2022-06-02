@@ -53,6 +53,7 @@ use {
 
 use {
    'folke/trouble.nvim',
+   disable = true,
    requires = 'kyazdani42/nvim-web-devicons',
 }
 
