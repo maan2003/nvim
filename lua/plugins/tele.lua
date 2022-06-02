@@ -66,3 +66,19 @@ use {
       require('telescope').load_extension 'frecency'
    end,
 }
+
+use {
+    'stevearc/dressing.nvim',
+    config = function()
+        require('dressing').setup({
+            input = {
+                enabled = true,
+                winblend = 0,
+            },
+            select = {
+                enabled = true,
+                telescope = require('telescope.themes').get_cursor()
+            },
+        })
+    end
+}
