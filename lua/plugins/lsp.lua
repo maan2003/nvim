@@ -9,14 +9,6 @@ use {
    end,
 }
 
-vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-   virtual_text = true,
-   signs = false,
-   underline = true,
-   update_in_insert = false,
-   severity_sort = true,
-})
-
 use {
    'simrat39/rust-tools.nvim',
    config = function()
