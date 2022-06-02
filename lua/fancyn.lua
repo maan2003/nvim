@@ -3,6 +3,7 @@ local modes = {
     search = "search",
     quickfixlist = "quickfixlist",
     locationlist = "locationlist",
+    diagnostics = "diagnostics",
 }
 
 function search() 
@@ -26,6 +27,9 @@ function fancy_n()
         cmd = "cnext"
     elseif current_mode == modes.locationlist then
         cmd = "lnext"
+    elseif current_mode == modes.diagnostics then
+        vim.diagnostic.goto_next()
+        return
     end
     xpcall(vim.cmd, function(err)
         print_error(string.gsub(err, [[^Vim%(.*%):]], ""))
@@ -34,18 +38,25 @@ end
 
 function fancy_N()
     local cmd
-    if current_mode == "search" then
+    if current_mode == modes.search then
         cmd = "normal! N"
-    elseif current_mode == "quicklist" then
+    elseif current_mode == modes.quickfixlist then
         cmd = "cprevious"
-    elseif current_mode == "locallist" then
+    elseif current_mode == modes.locationlist then
         cmd = "lprevious"
+    elseif current_mode == modes.diagnostics then
+        vim.diagnostic.goto_prev()
+        return
     end
     xpcall(vim.cmd, function(err)
-        p = "Vim(normal):"
-        local err = (err:sub(0, #p) == p) and err:sub(#p+1) or err
-        print_error(err)
+        print_error(string.gsub(err, [[^Vim%(.*%):]], ""))
     end, cmd)
 end
 
+-- TODO
+-- vim.api.nvim_create_autocmd("DiagnosticChanged", {
+--     pattern = '*',
+--     callback = function() 
+--     end
+-- })
 return { search = search, set_mode = set_mode, modes = modes, n = fancy_n, N = fancy_N }

@@ -13,8 +13,16 @@ return {
    { 'n', fancy_n.n },
    { 'N', fancy_n.N },
    { '/', fancy_n.search },
-   { 'ge', function () fancy_n.set_mode(fancy_n.modes.locationlist) end },
-   { 'gE', function () fancy_n.set_mode(fancy_n.modes.quickfixlist) end },
+   { 'ge', function () fancy_n.set_mode(fancy_n.modes.diagnostics) end },
+   { 'gq', function () fancy_n.set_mode(fancy_n.modes.quickfixlist) end },
+   { 'gl', function () fancy_n.set_mode(fancy_n.modes.locationlist) end },
+   { 'gE', function () 
+        fancy_n.set_mode(fancy_n.modes.quickfixlist)
+        vim.diagnostic.setqflist({open = false})
+        xpcall(vim.cmd, function(err)
+            print_error(string.gsub(err, [[^Vim%(.*%):]], ""))
+        end, "crewind")
+    end },
    -- jump movement
    { '<down>', '<c-o>' },                 -- CapsLock + k
    { '<up>', '<c-i>' },                   -- CapsLock + i
