@@ -27,6 +27,13 @@ use {
          },
          server = {
             cmd = { "nc", "localhost", "6969" },
+            root_dir = function(fname) 
+               local util = require 'lspconfig.util'
+               return util.root_pattern 'Cargo.lock'(fname)
+                   or util.root_pattern 'Cargo.toml'(fname)
+                   or util.root_pattern 'rust-project.json'(fname)
+                   or util.find_git_ancestor(fname)
+            end,
             capabilities = caps,
             standalone = false,
             settings = {
