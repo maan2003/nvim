@@ -11,10 +11,7 @@ use 'projekt0n/circles.nvim'
 
 use {
    'projekt0n/github-nvim-theme',
-   config = function()
-      -- require('github-theme').setup { theme_style = 'dark' }
-      -- vim.cmd[[hi Normal guibg=NONE ctermbg=NONE]]
-   end,
+   disable = true,
 }
 
 -- lua line
