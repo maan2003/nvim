@@ -24,6 +24,7 @@ use {
 
 use {
    'romgrk/nvim-treesitter-context',
+   after = 'nvim-treesitter',
    config = function()
       require('treesitter-context').setup {
          patterns = {
@@ -48,6 +49,7 @@ use {
 
 use {
    'nvim-treesitter/nvim-treesitter-textobjects',
+   after = 'nvim-treesitter',
    -- really ununsable right now
    config = function()
       require('nvim-treesitter.configs').setup {
