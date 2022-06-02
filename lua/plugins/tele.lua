@@ -69,6 +69,7 @@ use {
 
 use {
     'stevearc/dressing.nvim',
+    after = 'telescope.nvim',
     config = function()
         require('dressing').setup({
             input = {
