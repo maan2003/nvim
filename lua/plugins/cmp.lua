@@ -1,6 +1,5 @@
 local use = require('packer').use
 
-
 vim.cmd [[set completeopt=menu,menuone,noselect]]
 
 local has_words_before = function()
@@ -13,7 +12,7 @@ use 'hrsh7th/cmp-nvim-lsp'
 
 use {
    'hrsh7th/nvim-cmp',
-   config = function() 
+   config = function()
       local cmp = require 'cmp'
       local luasnip = require 'luasnip'
 
@@ -60,6 +59,5 @@ use {
             keyword_length = 2,
          },
       }
-   end
+   end,
 }
-

@@ -4,7 +4,7 @@ use {
    'neovim/nvim-lspconfig',
    config = function()
       local cfg = require 'lspconfig'
-      cfg.clangd.setup { }
+      cfg.clangd.setup {}
       cfg.zls.setup {}
    end,
 }
@@ -18,13 +18,13 @@ use {
             autoSetHints = false,
          },
          server = {
-            cmd = { "nc", "localhost", "6969" },
-            root_dir = function(fname) 
+            cmd = { 'nc', 'localhost', '6969' },
+            root_dir = function(fname)
                local util = require 'lspconfig.util'
                return util.root_pattern 'Cargo.lock'(fname)
-                   or util.root_pattern 'Cargo.toml'(fname)
-                   or util.root_pattern 'rust-project.json'(fname)
-                   or util.find_git_ancestor(fname)
+                  or util.root_pattern 'Cargo.toml'(fname)
+                  or util.root_pattern 'rust-project.json'(fname)
+                  or util.find_git_ancestor(fname)
             end,
             capabilities = caps,
             standalone = false,
@@ -51,35 +51,34 @@ use {
 
 use {
    'williamboman/nvim-lsp-installer',
-   config = function() 
-      local lsp_installer = require("nvim-lsp-installer")
+   config = function()
+      local lsp_installer = require 'nvim-lsp-installer'
 
       lsp_installer.on_server_ready(function(server)
          local opts = {}
          server:setup(opts)
       end)
-   end
+   end,
 }
 
-vim.diagnostic.config({signs = false})
+vim.diagnostic.config { signs = false }
 use {
-  "Maan2003/lsp_lines.nvim",
-  config = function()
-    require("lsp_lines").register_lsp_virtual_lines()
-    local min_warn = { min = vim.diagnostic.severity.WARN };
-    vim.diagnostic.config {
-        virtual_text = {
-           severity = min_warn,
-           prefix = "",
-           format = function(diag)
-              return diag.message:match("^([^\n]+)\n")
-           end
-        },
-        underline = {
+   'Maan2003/lsp_lines.nvim',
+   config = function()
+      require('lsp_lines').register_lsp_virtual_lines()
+      local min_warn = { min = vim.diagnostic.severity.WARN }
+      vim.diagnostic.config {
+         virtual_text = {
             severity = min_warn,
-        },
-        virtual_lines = false,
-    }
-  end,
+            prefix = '',
+            format = function(diag)
+               return diag.message:match '^([^\n]+)\n'
+            end,
+         },
+         underline = {
+            severity = min_warn,
+         },
+         virtual_lines = false,
+      }
+   end,
 }
-

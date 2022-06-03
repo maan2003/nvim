@@ -9,9 +9,9 @@ use {
       require('telescope').setup {
          defaults = {
             mappings = {
-                i = {
-                    ['<f9>'] =  require "telescope.actions".close,
-                },
+               i = {
+                  ['<f9>'] = require('telescope.actions').close,
+               },
             },
             layout_config = {
                horizontal = {
@@ -34,15 +34,15 @@ use {
                override_file_sorter = true,
             },
             frecency = {
-                ignore_patterns = {
-                '*.git/*',
-                '*/tmp/*',
-                '/usr/*',
-                '*/.rustup/*',
-                '/share/*',
-                '/usr/*',
-                '*/.cargo/registry/*',
-                },
+               ignore_patterns = {
+                  '*.git/*',
+                  '*/tmp/*',
+                  '/usr/*',
+                  '*/.rustup/*',
+                  '/share/*',
+                  '/usr/*',
+                  '*/.cargo/registry/*',
+               },
             },
          },
       }
@@ -68,18 +68,18 @@ use {
 }
 
 use {
-    'stevearc/dressing.nvim',
-    after = 'telescope.nvim',
-    config = function()
-        require('dressing').setup({
-            input = {
-                enabled = true,
-                winblend = 0,
-            },
-            select = {
-                enabled = true,
-                telescope = require('telescope.themes').get_cursor()
-            },
-        })
-    end
+   'stevearc/dressing.nvim',
+   after = 'telescope.nvim',
+   config = function()
+      require('dressing').setup {
+         input = {
+            enabled = true,
+            winblend = 0,
+         },
+         select = {
+            enabled = true,
+            telescope = require('telescope.themes').get_cursor(),
+         },
+      }
+   end,
 }

@@ -1,4 +1,4 @@
-local fancy_n = require("fancyn")
+local fancy_n = require 'fancyn'
 return {
    -- commands
    { 'xx', vim.lsp.buf.code_action },
@@ -7,53 +7,73 @@ return {
    } },
    { 'xf', vim.lsp.buf.formatting },
    { 'xr', vim.lsp.buf.rename },
-   { 'xe', function() 
-        local old = vim.diagnostic.config().virtual_lines
-        if old then
-            local min_warn = { min = vim.diagnostic.severity.WARN };
+   {
+      'xe',
+      function()
+         local old = vim.diagnostic.config().virtual_lines
+         if old then
+            local min_warn = { min = vim.diagnostic.severity.WARN }
             vim.diagnostic.config {
-                virtual_text = {
-                    severity = min_warn,
-                    format = function(diag)
-                        return diag.message:match("^([^\n]+)\n")
-                    end
-                },
-                underline = {
-                    severity = min_warn,
-                },
-                virtual_lines = false,
+               virtual_text = {
+                  severity = min_warn,
+                  format = function(diag)
+                     return diag.message:match '^([^\n]+)\n'
+                  end,
+               },
+               underline = {
+                  severity = min_warn,
+               },
+               virtual_lines = false,
             }
-        else
+         else
             vim.diagnostic.config {
-                underline = true,
-                virtual_lines = true,
-                virtual_text = false,
+               underline = true,
+               virtual_lines = true,
+               virtual_text = false,
             }
-        end
-    end
-    },
+         end
+      end,
+   },
    { mode = 'nvo', {
       { 'm', '<cmd>HopChar1<cr>' },
    } },
    { 'n', fancy_n.n },
    { 'N', fancy_n.N },
    { '/', fancy_n.search },
-   { 'ge', function () fancy_n.set_mode(fancy_n.modes.diagnostics) end },
-   { 'gq', function () fancy_n.set_mode(fancy_n.modes.quickfixlist) end },
-   { 'gl', function () fancy_n.set_mode(fancy_n.modes.locationlist) end },
-   { 'gE', function () 
-        fancy_n.set_mode(fancy_n.modes.quickfixlist)
-        vim.diagnostic.setqflist({open = false})
-        xpcall(vim.cmd, function(err)
-            print_error(string.gsub(err, [[^Vim%(.*%):]], ""))
-        end, "crewind")
-    end },
+   {
+      'ge',
+      function()
+         fancy_n.set_mode(fancy_n.modes.diagnostics)
+      end,
+   },
+   {
+      'gq',
+      function()
+         fancy_n.set_mode(fancy_n.modes.quickfixlist)
+      end,
+   },
+   {
+      'gl',
+      function()
+         fancy_n.set_mode(fancy_n.modes.locationlist)
+      end,
+   },
+   {
+      'gE',
+      function()
+         fancy_n.set_mode(fancy_n.modes.quickfixlist)
+         vim.diagnostic.setqflist { open = false }
+         xpcall(vim.cmd, function(err)
+            print_error(string.gsub(err, [[^Vim%(.*%):]], ''))
+         end, 'crewind')
+      end,
+   },
    -- jump movement
-   { '<down>', '<c-o>' },                 -- CapsLock + k
-   { '<up>', '<c-i>' },                   -- CapsLock + i
+   { '<down>', '<c-o>' }, -- CapsLock + k
+   { '<up>', '<c-i>' }, -- CapsLock + i
 
-   { '<left>', 'g;' },                    -- CapsLock + j
-   { '<ca-u>', 'g,' },                    -- CapsLock + u
+   { '<left>', 'g;' }, -- CapsLock + j
+   { '<ca-u>', 'g,' }, -- CapsLock + u
 
    -- lsp bindings
    { 'gd', '<cmd>Telescope lsp_definitions<cr>' },

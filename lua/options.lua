@@ -29,4 +29,3 @@ local wo = vim.wo
 wo.wrap = false
 wo.number = true
 wo.relativenumber = true
-
