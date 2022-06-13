@@ -63,7 +63,7 @@ use {
 
 vim.diagnostic.config { signs = false }
 use {
-   'Maan2003/lsp_lines.nvim',
+   '~/src/lsp_lines.nvim',
    config = function()
       require('lsp_lines').register_lsp_virtual_lines()
       local min_warn = { min = vim.diagnostic.severity.WARN }
