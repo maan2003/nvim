@@ -13,13 +13,14 @@ use {
    disable = true,
 }
 
+vim.cmd [[hi link LuasnipInsertNodeActive InfoFloat]]
+vim.cmd [[hi link LuasnipInsertNodePassive Visual]]
+
 -- lua line
 use {
    'hoob3rt/lualine.nvim',
    requires = { 'kyazdani42/nvim-web-devicons' },
    config = function()
-      vim.cmd [[hi link LuasnipInsertNodeActive InfoFloat]]
-      vim.cmd [[hi link LuasnipInsertNodePassive Visual]]
       require('lualine').setup {
          options = {
             disabled_filetypes = { 'toggleterm', 'Trouble' },
