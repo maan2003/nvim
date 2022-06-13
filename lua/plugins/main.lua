@@ -6,6 +6,7 @@ use {
    config = function()
       require('project_nvim').setup {
          manual_mode = false,
+         detection_methods = {'lsp'},
          exclude_dirs = { '~/.cargo/*', '~/.rustup/*', '~/.local/*', '/usr/*' },
       }
       require('telescope').load_extension 'projects'
