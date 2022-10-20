@@ -2,8 +2,12 @@ local use = require('packer').use
 
 vim.cmd [[set completeopt=menu,menuone,noselect]]
 
-use 'L3MON4D3/LuaSnip'
+use {'L3MON4D3/LuaSnip', config = function() 
+   require("luasnip.loaders.from_snipmate").load()
+end}
 use 'hrsh7th/cmp-nvim-lsp'
+use 'hrsh7th/cmp-buffer'
+use { 'saadparwaiz1/cmp_luasnip' }
 
 use {
    'hrsh7th/nvim-cmp',
@@ -14,7 +18,6 @@ use {
          local line, col = unpack(vim.api.nvim_win_get_cursor(0))
          return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match '%s' == nil
       end
-
 
       cmp.setup {
          snippet = {
@@ -50,6 +53,7 @@ use {
             end, { 'i', 's' }),
          },
          sources = {
+            { name = 'luasnip' },
             { name = 'nvim_lsp' },
          },
          completion = {
@@ -61,3 +65,4 @@ use {
       }
    end,
 }
+

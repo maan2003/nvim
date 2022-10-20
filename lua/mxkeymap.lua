@@ -2,10 +2,10 @@ local fancy_n = require 'fancyn'
 return {
    -- commands
    { 'xx', vim.lsp.buf.code_action },
-   { mode = 'v', {
+   { mode = 'x', {
       { 'xx', ':<c-u>lua vim.lsp.buf.range_code_action()<cr>' },
    } },
-   { 'xf', vim.lsp.buf.formatting },
+   { 'xf', function() vim.lsp.buf.format {asnyc = true} end },
    { 'xr', vim.lsp.buf.rename },
    {
       'xe',
@@ -16,9 +16,7 @@ return {
             vim.diagnostic.config {
                virtual_text = {
                   severity = min_warn,
-                  format = function(diag)
-                     return diag.message:match '^([^\n]+)\n'
-                  end,
+                  prefix = '',
                },
                underline = {
                   severity = min_warn,
@@ -34,7 +32,7 @@ return {
          end
       end,
    },
-   { mode = 'nvo', {
+   { mode = 'nxo', {
       { 'm', '<cmd>HopChar1<cr>' },
    } },
    { 'n', fancy_n.n },
@@ -62,7 +60,7 @@ return {
       'gE',
       function()
          fancy_n.set_mode(fancy_n.modes.quickfixlist)
-         vim.diagnostic.setqflist { open = false }
+         vim.diagnostic.setqflist { open = false, severity = vim.diagnostic.severity.ERROR }
          xpcall(vim.cmd, function(err)
             print_error(string.gsub(err, [[^Vim%(.*%):]], ''))
          end, 'crewind')
@@ -95,10 +93,24 @@ return {
    { '<F9>b', '<cmd>Telescope buffers<cr>' },
    { '<F9>F', '<cmd>Telescope frecency<cr>' },
    { '<F9>p', '<cmd>Telescope projects theme=dropdown<cr>' },
-   { '<F9>t', '<cmd>ToggleTerm<cr>' },
    { '<F9>g', '<cmd>Neogit kind=split<cr>' },
    { '<F9>/', '<cmd>Telescope live_grep<cr>' },
-   { mode = 't', { '<F9>t', '<cmd>ToggleTerm<cr>' } },
+   {
+      '<F9>t',
+      function()
+         local cwd = vim.fn.getcwd()
+         local ses = 'term-' .. cwd
+         vim.fn.jobstart(
+            'tmux new-session -d -s '
+               .. ses
+               .. '; tmux switch-client -t '
+               .. ses
+               .. '; tmux set-option -t '
+               .. ses
+               .. " set-titles-string 'term - #T'"
+         )
+      end,
+   },
    { '<F9>q', '<c-w>q' },
    { '<F9><s-q>', '<c-w><c-q>' },
 

@@ -12,10 +12,12 @@ use {
 use {
    'simrat39/rust-tools.nvim',
    config = function()
-      local caps = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+      local caps = require('cmp_nvim_lsp').default_capabilities()
       require('rust-tools').setup {
          tools = {
-            autoSetHints = false,
+                inlay_hints = {
+                    auto = false,
+                },
          },
          server = {
             cmd = { 'nc', 'localhost', '6969' },
@@ -65,14 +67,18 @@ vim.diagnostic.config { signs = false }
 use {
    '~/src/lsp_lines.nvim',
    config = function()
-      require('lsp_lines').register_lsp_virtual_lines()
+      require('lsp_lines').setup()
       local min_warn = { min = vim.diagnostic.severity.WARN }
       vim.diagnostic.config {
          virtual_text = {
             severity = min_warn,
             prefix = '',
             format = function(diag)
-               return diag.message:match '^([^\n]+)\n'
+               if diag.message:match 'Unused' then
+                  return ""
+               else
+                  return diag.message
+               end
             end,
          },
          underline = {

@@ -1,9 +1,10 @@
 pcall(require, 'impatient')
 local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
 
-vim.g.do_filetype_lua = 1
-vim.g.did_load_filetypes = 0
-
+vim.cmd[[
+let g:mapleader = "\<Space>"
+nnoremap <Space> <Nop>
+]]
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
    packer_bootstrap = vim.fn.system {
       'git',
@@ -34,3 +35,19 @@ require('packer').startup(function(use)
       require('packer').sync()
    end
 end)
+vim.cmd[[
+hi CmpItemKindDefault guifg=#d8a657
+hi CmpItemAbbrDefault guifg=#ddc7a1
+hi CmpItemAbbrMatchDefault guifg=#ddc7a1
+hi CmpItemAbbrMatchFuzzyDefault guifg=#ddc7a1
+]]
+
+if vim.fn.getcwd():match("cp") then
+   vim.cmd[[autocmd BufEnter *.cpp lua _CpAu()]]
+   function _CpAu()
+      if vim.fn.search("// headers {{{") == 0 then
+         vim.cmd[[0r~/cp/web/template.cpp]]
+      end
+      vim.cmd[[setlocal foldmethod=marker foldlevel=0]]
+   end
+end

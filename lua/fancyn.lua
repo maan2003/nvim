@@ -28,7 +28,7 @@ function fancy_n()
    elseif current_mode == modes.locationlist then
       cmd = 'lnext'
    elseif current_mode == modes.diagnostics then
-      vim.diagnostic.goto_next()
+      vim.diagnostic.goto_next({severity = vim.diagnostic.severity.ERROR})
       return
    end
    xpcall(vim.cmd, function(err)
@@ -45,7 +45,7 @@ function fancy_N()
    elseif current_mode == modes.locationlist then
       cmd = 'lprevious'
    elseif current_mode == modes.diagnostics then
-      vim.diagnostic.goto_prev()
+      vim.diagnostic.goto_prev({severity = vim.diagnostic.severity.ERROR})
       return
    end
    xpcall(vim.cmd, function(err)
