@@ -24,12 +24,14 @@ require('packer').startup(function(use)
    use 'nvim-lua/popup.nvim'
    use 'nvim-lua/plenary.nvim'
 
+   require 'gdb'
    require 'plugins/eye-candy'
    require 'plugins/main'
    require 'plugins/lsp'
    require 'plugins/ts'
    require 'plugins/tele'
    require 'plugins/cmp'
+   require 'plugins/dap'
 
    if packer_bootstrap then
       require('packer').sync()
@@ -45,9 +47,15 @@ hi CmpItemAbbrMatchFuzzyDefault guifg=#ddc7a1
 if vim.fn.getcwd():match("cp") then
    vim.cmd[[autocmd BufEnter *.cpp lua _CpAu()]]
    function _CpAu()
+      local line, col = unpack(vim.api.nvim_win_get_cursor(0))
       if vim.fn.search("// headers {{{") == 0 then
          vim.cmd[[0r~/cp/web/template.cpp]]
       end
       vim.cmd[[setlocal foldmethod=marker foldlevel=0]]
+      local lastline = vim.fn.line("$")
+      if line > lastline then
+          line = lastline
+      end
+      vim.api.nvim_win_set_cursor(0, { line, col })
    end
 end

@@ -164,78 +164,6 @@ use {
    end,
 }
 
-use {
-   'Maan2003/nvim-gdb',
-   run = './install.sh',
-   config = function()
-      local function gdb()
-         return NvimGdb.i()
-      end
-
-      local function gdbsend(arg)
-         return function()
-            gdb():send(arg)
-         end
-      end
-
-      dbg_mappings = {
-         { 'n', gdbsend 'next' },
-         { 's', gdbsend 'step' },
-         { 'N', gdbsend 'reverse-next' },
-         { 'f', gdbsend 'finish' },
-         { 'F', gdbsend 'reverse-finish' },
-         {
-            'u',
-            function()
-               gdb():send('until "%s:%s"', vim.fn.expand '%:p', vim.fn.line '.')
-            end,
-         },
-         {
-            'U',
-            function()
-               gdb():send('until "%s:%s"', vim.fn.expand '%:p', vim.fn.line '.')
-            end,
-         },
-         { 'c', gdbsend 'continue' },
-         { 'C', gdbsend 'reverse-continue' },
-         -- TODO: treesitter expr
-         { 'p', '<cmd>GdbEvalWord<cr>' },
-         {
-            'a',
-            function()
-               gdb():send('advance "%s:%s"', vim.fn.expand '%:p', vim.fn.line '.')
-            end,
-         },
-         {
-            'd',
-            function()
-               gdb():breakpoint_toggle()
-            end,
-         },
-         { '<C-u>', gdbsend 'up' },
-         { '<C-d>', gdbsend 'down' },
-      }
-
-      require('nvimgdb.config').setup {
-         set_keymaps = function()
-            require('nest').applyKeymaps {
-               buffer = true,
-               options = { nowait = true, noremap = true },
-               dbg_mappings,
-            }
-         end,
-         unset_keymaps = function()
-            for _, value in ipairs(dbg_mappings) do
-               vim.api.nvim_buf_del_keymap(0, 'n', value[1])
-            end
-         end,
-      }
-
-      vim.cmd [[hi GdbCurrentLine guibg=#464022]]
-      vim.cmd [[hi GdbBreakpointSign guifg=#EA6962]]
-   end,
-}
-
 vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, {
    pattern = { 'term://*' },
    callback = function()
@@ -258,13 +186,13 @@ vim.cmd [[noremap <F9><F9> <C-w><C-w>]]
 vim.cmd [[autocmd TermOpen * setlocal nobuflisted nonumber norelativenumber]]
 
 use {
-   'jghauser/mkdir.nvim',
+  'nmac427/guess-indent.nvim',
+  config = function() require('guess-indent').setup {} end,
 }
 
 use {
-   'Darazaki/indent-o-matic', 
-   config = function() require('indent-o-matic').setup { } end,
-} 
+   'jghauser/mkdir.nvim',
+}
 
 use {
     'glacambre/firenvim',
@@ -313,4 +241,21 @@ use {
 }
 
 vim.cmd[[autocmd FileType * set formatoptions-=o]]
+
+use {
+	"chrisgrieser/nvim-various-textobjs",
+	config = function () 
+		require("various-textobjs").setup({ useDefaultKeymaps = true })
+	end,
+}
+
+use {
+   "nvim-neo-tree/neo-tree.nvim",
+   branch = "v2.x",
+   requires = { 
+   "nvim-lua/plenary.nvim",
+   "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+   "MunifTanjim/nui.nvim",
+   }
+}
 

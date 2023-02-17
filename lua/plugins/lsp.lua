@@ -1,11 +1,41 @@
 local use = require('packer').use
 
 use {
+   'williamboman/mason.nvim',
+   config = function() 
+      require("mason").setup()
+   end,
+}
+
+use {
+   'williamboman/mason-lspconfig.nvim',
+   config = function()
+      require('mason-lspconfig').setup {
+         automatic_installation = true,
+      }
+   end,
+}
+
+use {
+   "folke/neodev.nvim",
+   config = function ()
+   end
+}
+
+use {
    'neovim/nvim-lspconfig',
    config = function()
+      require("neodev").setup{ }
       local cfg = require 'lspconfig'
       cfg.clangd.setup {}
       cfg.zls.setup {}
+      cfg.tsserver.setup {
+         single_file_support = false,
+      }
+      cfg.pyright.setup{}
+      cfg.sumneko_lua.setup {}
+      cfg.denols.setup {}
+      cfg.svelte.setup {}
    end,
 }
 
@@ -30,16 +60,6 @@ use {
             end,
             capabilities = caps,
             standalone = false,
-            settings = {
-               ['rust-analyzer'] = {
-                  checkOnSave = {
-                     command = 'check',
-                  },
-                  cargo = {
-                     runBuildScript = true,
-                  },
-               },
-            },
          },
       }
    end,
@@ -49,18 +69,6 @@ use {
    'folke/trouble.nvim',
    disable = true,
    requires = 'kyazdani42/nvim-web-devicons',
-}
-
-use {
-   'williamboman/nvim-lsp-installer',
-   config = function()
-      local lsp_installer = require 'nvim-lsp-installer'
-
-      lsp_installer.on_server_ready(function(server)
-         local opts = {}
-         server:setup(opts)
-      end)
-   end,
 }
 
 vim.diagnostic.config { signs = false }
@@ -88,3 +96,4 @@ use {
       }
    end,
 }
+

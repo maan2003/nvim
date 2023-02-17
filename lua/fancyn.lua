@@ -53,10 +53,4 @@ function fancy_N()
    end, cmd)
 end
 
--- TODO
--- vim.api.nvim_create_autocmd("DiagnosticChanged", {
---     pattern = '*',
---     callback = function()
---     end
--- })
 return { search = search, set_mode = set_mode, modes = modes, n = fancy_n, N = fancy_N }

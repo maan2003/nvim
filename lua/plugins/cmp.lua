@@ -32,10 +32,15 @@ use {
             ['<C-e>'] = cmp.mapping.close(),
             ['<CR>'] = cmp.mapping.confirm { select = true },
             ['<Tab>'] = cmp.mapping(function(fallback)
-               if cmp.visible() then
-                  cmp.select_next_item()
-               elseif luasnip.expand_or_jumpable() then
+               if luasnip.expand_or_jumpable() then
                   luasnip.expand_or_jump()
+               elseif cmp.visible() then
+                  local entry = cmp.get_selected_entry()
+                  if not entry then
+                    cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+                  else
+                    cmp.confirm { select = true }
+                  end
                elseif has_words_before() then
                   cmp.complete()
                else

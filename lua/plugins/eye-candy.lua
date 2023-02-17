@@ -39,7 +39,7 @@ use {
    config = function()
       require('lualine').setup {
          options = {
-            theme = 'zenwritten',
+            -- theme = 'zenwritten',
             disabled_filetypes = { 'toggleterm', 'Trouble' },
             section_separators = '',
             component_separtors = '',

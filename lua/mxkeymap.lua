@@ -17,6 +17,13 @@ return {
                virtual_text = {
                   severity = min_warn,
                   prefix = '',
+                  format = function(diag)
+                     if diag.message:match 'Unused' then
+                        return ""
+                     else
+                        return diag.message
+                     end
+                  end,
                },
                underline = {
                   severity = min_warn,
@@ -39,7 +46,7 @@ return {
    { 'N', fancy_n.N },
    { '/', fancy_n.search },
    {
-      'ge',
+      'gE',
       function()
          fancy_n.set_mode(fancy_n.modes.diagnostics)
       end,
@@ -57,7 +64,7 @@ return {
       end,
    },
    {
-      'gE',
+      'ge',
       function()
          fancy_n.set_mode(fancy_n.modes.quickfixlist)
          vim.diagnostic.setqflist { open = false, severity = vim.diagnostic.severity.ERROR }
@@ -74,7 +81,7 @@ return {
    { '<ca-u>', 'g,' }, -- CapsLock + u
 
    -- lsp bindings
-   { 'gd', '<cmd>Telescope lsp_definitions<cr>' },
+   { 'gd', function () vim.lsp.buf.definition()  end },
    { 'gr', '<cmd>Telescope lsp_references<cr>' },
    { 'gt', '<cmd>Telescope lsp_type_definitions<cr>' },
    { 'gi', '<cmd>Telescope lsp_implementations<cr>' },

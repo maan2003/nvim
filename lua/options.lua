@@ -2,7 +2,7 @@ local opts = {
    completeopt = 'menuone,noselect',
    virtualedit = 'onemore',
    mouse = 'a',
-   guifont = 'Agave:h16',
+   guifont = 'Fragment Mono:h12',
    undofile = true,
    lazyredraw = true,
    expandtab = true,
@@ -14,7 +14,7 @@ local opts = {
    shell = 'zsh',
    lazyredraw = true,
    incsearch = true,
-   scrolloff = 3,
+   scrolloff = 1,
    ignorecase = true,
    smartcase = true,
    showmode = false,
@@ -29,7 +29,7 @@ local opts = {
    cmdheight = 0,
 }
 
-vim.cmd[[let g:zenwritten_transparent_background = 1]]
+-- vim.cmd[[let g:zenwritten_transparent_background = 1]]
 for key, value in pairs(opts) do
    vim.o[key] = value
 end
