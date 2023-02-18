@@ -71,23 +71,34 @@ return {
    {
       dir = '~/src/lsp_lines.nvim',
       event = "LspAttach",
+      keys = {
+         {
+            'xe',
+            function()
+               local old = vim.diagnostic.config().virtual_lines
+               if old then
+                  vim.diagnostic.config {
+                     virtual_text = false,
+                     underline = {
+                        severity = { min = vim.diagnostic.severity.WARN }
+                     },
+                     virtual_lines = false,
+                  }
+               else
+                  vim.diagnostic.config {
+                     underline = true,
+                     virtual_lines = true,
+                  }
+               end
+            end,
+         },
+      },
       config = function()
          require('lsp_lines').setup()
-         local min_warn = { min = vim.diagnostic.severity.WARN }
          vim.diagnostic.config {
-            virtual_text = {
-               severity = min_warn,
-               prefix = '',
-               format = function(diag)
-                  if diag.message:match 'Unused' then
-                     return ""
-                  else
-                     return diag.message
-                  end
-               end,
-            },
+            virtual_text = false,
             underline = {
-               severity = min_warn,
+               severity = { min = vim.diagnostic.severity.WARN }
             },
             virtual_lines = false,
          }

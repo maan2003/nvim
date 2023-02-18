@@ -1,38 +1,6 @@
 local fancy_n = require 'fancyn'
 return {
    -- commands
-   {
-      'xe',
-      function()
-         local old = vim.diagnostic.config().virtual_lines
-         if old then
-            local min_warn = { min = vim.diagnostic.severity.WARN }
-            vim.diagnostic.config {
-               virtual_text = {
-                  severity = min_warn,
-                  prefix = '',
-                  format = function(diag)
-                     if diag.message:match 'Unused' then
-                        return ""
-                     else
-                        return diag.message
-                     end
-                  end,
-               },
-               underline = {
-                  severity = min_warn,
-               },
-               virtual_lines = false,
-            }
-         else
-            vim.diagnostic.config {
-               underline = true,
-               virtual_lines = true,
-               virtual_text = false,
-            }
-         end
-      end,
-   },
    { 'n', fancy_n.n },
    { 'N', fancy_n.N },
    { '/', fancy_n.search },
