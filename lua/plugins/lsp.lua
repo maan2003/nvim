@@ -15,7 +15,7 @@ return {
          },
       },
       keys = {
-         { 'xx', vim.lsp.buf.code_action, mode = {'n', 'x'} },
+         { 'xx', vim.lsp.buf.code_action, mode = { 'n', 'x' } },
          { 'xf', vim.lsp.buf.format },
          { 'xr', vim.lsp.buf.rename },
          { 'gd', vim.lsp.buf.definition },
@@ -43,7 +43,7 @@ return {
       'simrat39/rust-tools.nvim',
       event = "BufReadPre *.rs",
       keys = {
-         {'gu', function() require('rust-tools').parent_module.parent_module() end }
+         { 'gu', function() require('rust-tools').parent_module.parent_module() end }
       },
       config = function()
          local caps = require('cmp_nvim_lsp').default_capabilities()
