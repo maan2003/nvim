@@ -2,6 +2,14 @@ vim.o.termguicolors = true
 vim.cmd [[hi link LuasnipInsertNodeActive Visual]]
 
 vim.cmd [[colorscheme zenwritten]]
+vim.cmd [[hi DiagnosticUnderlineError gui=none guibg=#2e1f1f]]
+vim.cmd [[hi DiagnosticUnderlineWarn gui=none guibg=#3f3122]]
+vim.cmd [[hi DiagnosticUnderlineInfo gui=none guibg=#22373f]]
+vim.cmd [[hi DiagnosticUnderlineHint gui=none guibg=#271f2e]]
+vim.cmd [[hi DiagnosticVirtualTextError guibg=none]]
+vim.cmd [[hi DiagnosticVirtualTextWarn guibg=none]]
+vim.cmd [[hi DiagnosticVirtualTextInfo guibg=none]]
+vim.cmd [[hi DiagnosticVirtualTextHint guibg=none]]
 return {
    -- {
    --    "mcchrish/zenbones.nvim",
@@ -15,6 +23,7 @@ return {
    'kyazdani42/nvim-web-devicons',
    {
       'echasnovski/mini.statusline', version = false,
+      dependencies = { 'lewis6991/gitsigns.nvim' },
       config = function()
          require("mini.statusline").setup({
             content = {
@@ -22,56 +31,25 @@ return {
                   local mode, mode_hl = MiniStatusline.section_mode({ trunc_width = 120 })
                   local git = MiniStatusline.section_git({ trunc_width = 75 })
                   local diagnostics = MiniStatusline.section_diagnostics({ trunc_width = 75 })
-                  local filename = MiniStatusline.section_filename({ trunc_width = 140 })
+                  local filename = MiniStatusline.section_filename({ trunc_width = 120 })
                   return MiniStatusline.combine_groups({
                      { hl = "Visual", strings = { mode } },
+                     { hl = "MiniStatuslineDevinfo", strings = { git } },
                      "%<", -- Mark general truncate point
                      { hl = "MiniStatuslineFilename", strings = { filename } },
                      "%=", -- End left alignment
-                     { hl = "MiniStatuslineDevinfo", strings = { git, diagnostics } },
+                     { hl = "MiniStatuslineDevinfo", strings = { diagnostics } },
                   })
                end,
                inactive = nil,
             },
 
             -- Whether to use icons by default
-            use_icons = true,
+            use_icons = false,
             set_vim_settings = false,
          })
          vim.o.laststatus = 3
       end
-   },
-   {
-      'hoob3rt/lualine.nvim',
-      enabled = false,
-      lazy = false,
-      opts = {
-         options = {
-            -- theme = 'zenwritten',
-            section_separators = '',
-            component_separtors = '',
-            icons_enabled = false,
-            globalstatus = true,
-         },
-         sections = {
-            lualine_b = {},
-            lualine_c = {
-               {
-                  'filename',
-                  file_status = true, -- Displays file status (readonly status, modified status)
-                  path = 1, -- relative path
-                  shorting_target = 40, -- Shortens path to leave 40 spaces in the window
-                  -- for other components. (terrible name, any suggestions?)
-                  symbols = {
-                     modified = '[+]', -- Text to show when the file is modified.
-                     readonly = '[-]', -- Text to show when the file is non-modifiable or readonly.
-                     unnamed = '[No Name]', -- Text to show for unnamed buffers.
-                  },
-               },
-            },
-            lualine_x = {},
-         },
-      }
    },
    {
       "rcarriga/nvim-notify",
