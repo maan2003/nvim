@@ -1,46 +1,53 @@
-local use = require('packer').use
--- themes
-use 'wittyjudge/gruvbox-material.nvim'
-use 'Shatur/neovim-ayu'
--- require('gruvbox-material').setup {}
-
 vim.o.termguicolors = true
-
-use 'projekt0n/circles.nvim'
-
-use 'projekt0n/github-nvim-theme'
-use 'sainnhe/everforest'
-
-use {
-   'j-hui/fidget.nvim',
-   config = function()
-      require('fidget').setup {}
-   end
-}
-use {
-    "mcchrish/zenbones.nvim",
-    -- Optionally install Lush. Allows for more configuration or extending the colorscheme
-    -- If you don't want to install lush, make sure to set g:zenbones_compat = 1
-    -- In Vim, compat mode is turned on as Lush only works in Neovim.
-    requires = "rktjmp/lush.nvim",
-    config = function()
-        vim.cmd[[colorscheme zenwritten]]
-    end
-}
-
 vim.cmd [[hi link LuasnipInsertNodeActive Visual]]
--- no highlight for passive nodes
--- vim.cmd [[hi link LuasnipInsertNodePassive Visual]]
 
--- lua line
-use {
-   'hoob3rt/lualine.nvim',
-   requires = { 'kyazdani42/nvim-web-devicons' },
-   config = function()
-      require('lualine').setup {
+vim.cmd [[colorscheme zenwritten]]
+return {
+   -- {
+   --    "mcchrish/zenbones.nvim",
+   --    dependencies = { "rktjmp/lush.nvim" },
+   --    priority = 200,
+   --    lazy = false,
+   --    config = function()
+   --       vim.cmd [[colorscheme zenwritten]]
+   --    end
+   -- },
+   'kyazdani42/nvim-web-devicons',
+   {
+      'echasnovski/mini.statusline', version = false,
+      config = function()
+         require("mini.statusline").setup({
+            content = {
+               active = function()
+                  local mode, mode_hl = MiniStatusline.section_mode({ trunc_width = 120 })
+                  local git = MiniStatusline.section_git({ trunc_width = 75 })
+                  local diagnostics = MiniStatusline.section_diagnostics({ trunc_width = 75 })
+                  local filename = MiniStatusline.section_filename({ trunc_width = 140 })
+                  return MiniStatusline.combine_groups({
+                     { hl = "Visual", strings = { mode } },
+                     "%<", -- Mark general truncate point
+                     { hl = "MiniStatuslineFilename", strings = { filename } },
+                     "%=", -- End left alignment
+                     { hl = "MiniStatuslineDevinfo", strings = { git, diagnostics } },
+                  })
+               end,
+               inactive = nil,
+            },
+
+            -- Whether to use icons by default
+            use_icons = true,
+            set_vim_settings = false,
+         })
+         vim.o.laststatus = 3
+      end
+   },
+   {
+      'hoob3rt/lualine.nvim',
+      enabled = false,
+      lazy = false,
+      opts = {
          options = {
             -- theme = 'zenwritten',
-            disabled_filetypes = { 'toggleterm', 'Trouble' },
             section_separators = '',
             component_separtors = '',
             icons_enabled = false,
@@ -65,21 +72,24 @@ use {
             lualine_x = {},
          },
       }
-   end,
+   },
+   {
+      "rcarriga/nvim-notify",
+      opts = {
+         render = 'minimal',
+         stages = 'static',
+      }
+   },
+   {
+      "folke/noice.nvim",
+      config = function()
+         require("noice").setup()
+      end,
+      dependencies = {
+         -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+         "MunifTanjim/nui.nvim",
+         "rcarriga/nvim-notify",
+         "hrsh7th/nvim-cmp",
+      }
+   }
 }
-
--- Packer
--- use({
---   "folke/noice.nvim",
---   event = "VimEnter",
---   enabled = false,
---   config = function()
---     require("noice").setup()
---   end,
---   requires = {
---     -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
---     "MunifTanjim/nui.nvim",
---     "rcarriga/nvim-notify",
---     "hrsh7th/nvim-cmp",
---     }
--- })

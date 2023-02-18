@@ -1,12 +1,6 @@
 local fancy_n = require 'fancyn'
 return {
    -- commands
-   { 'xx', vim.lsp.buf.code_action },
-   { mode = 'x', {
-      { 'xx', ':<c-u>lua vim.lsp.buf.range_code_action()<cr>' },
-   } },
-   { 'xf', function() vim.lsp.buf.format {asnyc = true} end },
-   { 'xr', vim.lsp.buf.rename },
    {
       'xe',
       function()
@@ -39,9 +33,6 @@ return {
          end
       end,
    },
-   { mode = 'nxo', {
-      { 'm', '<cmd>HopChar1<cr>' },
-   } },
    { 'n', fancy_n.n },
    { 'N', fancy_n.N },
    { '/', fancy_n.search },
@@ -73,53 +64,16 @@ return {
          end, 'crewind')
       end,
    },
-   -- jump movement
-   { '<down>', '<c-o>' }, -- CapsLock + k
-   { '<up>', '<c-i>' }, -- CapsLock + i
+   { '<Leader>s', '<cmd>w<cr>' },
+   { '<Leader>k', '<cmd>bd<cr>' },
+   { '<Leader>f', '<cmd>Telescope find_files<cr>' },
+   { '<Leader>o', '<c-w><c-o>' },
+   { '<Leader>0', '<cmd>close<cr>' },
+   { '<Leader>1', '<cmd>split<cr>' },
+   { '<Leader>2', '<cmd>vsplit<cr>' },
 
-   { '<left>', 'g;' }, -- CapsLock + j
-   { '<ca-u>', 'g,' }, -- CapsLock + u
-
-   -- lsp bindings
-   { 'gd', function () vim.lsp.buf.definition()  end },
-   { 'gr', '<cmd>Telescope lsp_references<cr>' },
-   { 'gt', '<cmd>Telescope lsp_type_definitions<cr>' },
-   { 'gi', '<cmd>Telescope lsp_implementations<cr>' },
-   { 'g<space>', '<cmd>Telescope lsp_dynamic_workspace_symbols<cr>' },
-   { 'gu', '<cmd>RustParentModule<cr>' },
-
-   { '<F9>s', '<cmd>w<cr>' },
-   { '<F9>k', '<cmd>bd<cr>' },
-   { '<F9>f', '<cmd>Telescope find_files<cr>' },
-   { '<F9>o', '<c-w><c-o>' },
-   { '<F9>0', '<cmd>close<cr>' },
-   { '<F9>1', '<cmd>split<cr>' },
-   { '<F9>2', '<cmd>vsplit<cr>' },
-
-   --
-   { '<F9>b', '<cmd>Telescope buffers<cr>' },
-   { '<F9>F', '<cmd>Telescope frecency<cr>' },
-   { '<F9>p', '<cmd>Telescope projects theme=dropdown<cr>' },
-   { '<F9>g', '<cmd>Neogit kind=split<cr>' },
-   { '<F9>/', '<cmd>Telescope live_grep<cr>' },
-   {
-      '<F9>t',
-      function()
-         local cwd = vim.fn.getcwd()
-         local ses = 'term-' .. cwd
-         vim.fn.jobstart(
-            'tmux new-session -d -s '
-               .. ses
-               .. '; tmux switch-client -t '
-               .. ses
-               .. '; tmux set-option -t '
-               .. ses
-               .. " set-titles-string 'term - #T'"
-         )
-      end,
-   },
-   { '<F9>q', '<c-w>q' },
-   { '<F9><s-q>', '<c-w><c-q>' },
+   { '<Leader>q', '<c-w>q' },
+   { '<Leader><s-q>', '<c-w><c-q>' },
 
    -- insert mode
    {
