@@ -18,12 +18,6 @@ vim.opt.rtp:prepend(lazypath)
 
 require 'options'
 require("lazy").setup('plugins')
-vim.cmd [[
-hi CmpItemKindDefault guifg=#d8a657
-hi CmpItemAbbrDefault guifg=#ddc7a1
-hi CmpItemAbbrMatchDefault guifg=#ddc7a1
-hi CmpItemAbbrMatchFuzzyDefault guifg=#ddc7a1
-]]
 
 if vim.fn.getcwd():match("cp") then
    vim.cmd [[autocmd BufEnter *.cpp lua _CpAu()]]
